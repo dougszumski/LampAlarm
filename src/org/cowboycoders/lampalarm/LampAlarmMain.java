@@ -50,6 +50,8 @@ public class LampAlarmMain extends Activity {
     private ListView mConversationView;
     // String buffer for outgoing messages
     private StringBuffer mOutStringBuffer;
+ // String buffer for incomingg messages
+    private StringBuffer mInStringBuffer;
     // Member object for the chat services
     private BluetoothMessageService mLampAlarmService = null;
 
@@ -120,6 +122,9 @@ public class LampAlarmMain extends Activity {
 
         // Initialize the buffer for outgoing messages
         mOutStringBuffer = new StringBuffer("");
+        
+        // Initialize the buffer for incoming messages
+        mInStringBuffer = new StringBuffer("");
     }
 	
 	/**
@@ -186,8 +191,13 @@ public class LampAlarmMain extends Activity {
             case MESSAGE_READ:
                 byte[] readBuf = (byte[]) msg.obj;
                 // construct a string from the valid bytes in the buffer
+                // The buffer length is 1024
                 String readMessage = new String(readBuf, 0, msg.arg1);
-                mConversationArrayAdapter.add(mConnectedDeviceName+":  " + readMessage);
+                if(D) Log.i(TAG, "MESSAGE_LENGTH: " + readMessage.length());
+                // Append the message to the string buffer
+                mInStringBuffer.append(readMessage);
+                //TODO pass the string buffer to a pars
+                mConversationArrayAdapter.add(mConnectedDeviceName+":  " + mInStringBuffer);
                 break;
             case MESSAGE_DEVICE_NAME:
                 // save the connected device's name
@@ -232,18 +242,6 @@ public class LampAlarmMain extends Activity {
             .getString(BluetoothConfigure.EXTRA_DEVICE_ADDRESS);
         // Get the BluetoothDevice object
         BluetoothDevice device = mBluetoothAdapter.getRemoteDevice(address);
-        // Service UUID
-        //UUID uuid = UUID.fromString(BLUETOOTH_UART_UUID);
-        // Open a socket 
-		//try {
-		//	mSocket = device.createRfcommSocketToServiceRecord(uuid);
-	//		mSocket.connect();
-	//		mOutputStream = mSocket.getOutputStream();
-	   //     mInputStream = mSocket.getInputStream();
-	//	} catch (IOException e) {
-		//	// TODO Auto-generated catch block
-	//		e.printStackTrace();
-        
      // Attempt to connect to the device
         mLampAlarmService.connect(device);
 
