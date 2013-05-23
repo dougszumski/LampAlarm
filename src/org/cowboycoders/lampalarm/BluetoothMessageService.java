@@ -417,16 +417,21 @@ public class BluetoothMessageService {
             Log.i(TAG, "BEGIN mConnectedThread");
             byte[] buffer = new byte[1024];
             int bytes;
+            CowboyMessageParser msg = new CowboyMessageParser();
+            int i = 0;
 
             // Keep listening to the InputStream while connected
             while (true) {
                 try {
                     // Read from the InputStream
                     bytes = mmInStream.read(buffer);
-                    
+                    System.out.println(i++ + ":  "+bytes);
+                    // Send the stream to a parser will write to the screen if need be.
+                    //msg.echoBack(buffer);
                     // Send the obtained bytes to the UI Activity
-                    mHandler.obtainMessage(LampAlarmMain.MESSAGE_READ, bytes, -1, buffer)
-                            .sendToTarget();
+                    //mHandler.obtainMessage(LampAlarmMain.MESSAGE_READ, bytes, -1, buffer)
+                    //        .sendToTarget();
+                    
                 } catch (IOException e) {
                     Log.e(TAG, "disconnected", e);
                     connectionLost();

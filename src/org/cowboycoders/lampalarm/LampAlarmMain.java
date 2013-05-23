@@ -124,7 +124,7 @@ public class LampAlarmMain extends Activity {
         mOutStringBuffer = new StringBuffer("");
         
         // Initialize the buffer for incoming messages
-        mInStringBuffer = new StringBuffer("");
+        //mInStringBuffer = new StringBuffer("");
     }
 	
 	/**
