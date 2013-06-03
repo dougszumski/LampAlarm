@@ -25,5 +25,10 @@
     <string name="title_connected_to">connected to device</string>
     <string name="title_not_connected">not connected</string>
     <string name="bt_not_enabled_leaving">Bluetooth was not enabled. Leaving Bluetooth Chat.</string>
+    <string name="up_button">Up</string>
+    <string name="left_button">Left</string>
+    <string name="right_button">Right</string>
+    
+    
 
 </resources>

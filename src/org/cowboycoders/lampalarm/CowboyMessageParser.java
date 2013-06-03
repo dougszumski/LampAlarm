@@ -54,9 +54,16 @@ public class CowboyMessageParser {
 		String tempByte;
  		for (int i = 0; i < mFrameBuffer.length(); i+=2){
  			//Convert string to int 2 chars at a time
- 			Integer tmp = Integer.parseInt(mFrameBuffer.substring(i, i+2), 16);
-			buffer.add(tmp);
-			if(D) Log.i(TAG, "Chars: " + mFrameBuffer.substring(i, i+2) + " result: " + tmp);
+ 			try {
+ 				Integer tmp = Integer.parseInt(mFrameBuffer.substring(i, i+2), 16);
+ 				buffer.add(tmp);
+ 				if(D) Log.i(TAG, "Chars: " + mFrameBuffer.substring(i, i+2) + " result: " + tmp);
+ 			} catch (NumberFormatException e) {
+ 				if(D) Log.e(TAG, "Number format exception");
+ 				buffer.add(0x00);
+ 			}
+			
+			
 		}
 		return buffer;
 	}

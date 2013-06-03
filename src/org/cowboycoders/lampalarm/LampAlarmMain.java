@@ -114,8 +114,7 @@ public class LampAlarmMain extends Activity {
 
         // Initialize the array adapter for the conversation thread
         mConversationArrayAdapter = new ArrayAdapter<String>(this, R.layout.message);
-        mConversationView = (ListView) findViewById(R.id.in);
-        mConversationView.setAdapter(mConversationArrayAdapter);
+      
         
         // Make a message button
  		Button button = (Button) findViewById(R.id.button1);
@@ -123,7 +122,7 @@ public class LampAlarmMain extends Activity {
  			@Override
  			public void onClick(View v) {
  				//Toast.makeText(LampAlarmMain.this, "Test", Toast.LENGTH_SHORT).show();
- 				String msg = "HELLO WORLD\n";
+ 				String msg = ":s:";
  				sendMessage(msg);
  				//Toast.makeText(LampAlarmMain.this, "SENT", Toast.LENGTH_SHORT).show();
  		        
