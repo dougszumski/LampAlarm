@@ -19,6 +19,8 @@ package org.cowboycoders.lampalarm;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import android.bluetooth.BluetoothAdapter;
@@ -419,13 +421,19 @@ public class BluetoothMessageService {
             int bytes;
             CowboyMessageParser msg = new CowboyMessageParser();
             int i = 0;
+            List<Integer> frame = new ArrayList<Integer>();
 
             // Keep listening to the InputStream while connected
             while (true) {
                 try {
                     // Read from the InputStream
                     bytes = mmInStream.read(buffer);
-                    System.out.println(i++ + ":  "+bytes);
+                    frame = msg.append(buffer, bytes);      
+                    //If the frame isn't null send it back 
+                    if (frame != null) {
+                    	Log.i(TAG, "Sending frame back of length: "+ frame.size());
+                    	mHandler.obtainMessage(LampAlarmMain.MESSAGE_READ, frame.size(), -1, frame).sendToTarget();
+                    }
                     // Send the stream to a parser will write to the screen if need be.
                     //msg.echoBack(buffer);
                     // Send the obtained bytes to the UI Activity

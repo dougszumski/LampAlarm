@@ -46,7 +46,7 @@ public final class R {
         public static final int ambilwarna_warnaLama=0x7f08000a;
         public static final int button1=0x7f080002;
         public static final int button_scan=0x7f080011;
-        public static final int imageView1=0x7f080000;
+        public static final int image=0x7f080000;
         public static final int in=0x7f080001;
         public static final int new_devices=0x7f080010;
         public static final int paired_devices=0x7f08000e;
