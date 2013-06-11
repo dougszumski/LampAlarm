@@ -10,6 +10,8 @@ public class CowboyMessageParser {
 	//Debug
 	private static final String TAG = "MessageParser";
 	private static final boolean D = false;
+	
+	private static final CharSequence END_FRAME_MARKER = ":";
 
 	// String buffer for incoming messages
     private StringBuffer mFrameBuffer;
@@ -27,6 +29,8 @@ public class CowboyMessageParser {
 		List<Integer> frame = new ArrayList<Integer>();
 		boolean frameReady = false;
 		
+		StringBuffer ackPacket = new StringBuffer("");
+		
 		for (int i = 0; i < stringMessage.length(); ++i){
 		    char c = stringMessage.charAt(i);        
 		    if (c == ':') {
@@ -35,6 +39,10 @@ public class CowboyMessageParser {
 		    	frame = assembleFrame();
 		    	frameReady = true;
 		    	resetFrameBuffer();
+		    if (c == '#') {
+		    	ackPacket.setLength(0); 
+		    }
+		    	
 		    } else {
 		    	mFrameBuffer.append(c);
 		    }

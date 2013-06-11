@@ -44,10 +44,10 @@ public class BluetoothMessageService {
     private static final String TAG = "BluetoothChatService";
     private static final boolean D = true;
     
- // Name for the SDP record when creating server socket
+    // Name for the SDP record when creating server socket
     private static final String SDP_RECORD_NAME = "BluetoothUartService";
 
-    //Bluetooth UART UUID
+    // Bluetooth UART UUID
     private static final UUID BLUETOOTH_UART_UUID = 
             UUID.fromString("00001101-0000-1000-8000-00805f9b34fb");
     
@@ -85,7 +85,7 @@ public class BluetoothMessageService {
         mState = state;
 
         // Give the new state to the Handler so the UI Activity can update
-        mHandler.obtainMessage(LampAlarmMain.MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
+        mHandler.obtainMessage(MessageHandler.MESSAGE_STATE_CHANGE, state, -1).sendToTarget();
     }
 
     /**
@@ -162,9 +162,9 @@ public class BluetoothMessageService {
         mConnectedThread.start();
 
         // Send the name of the connected device back to the UI Activity
-        Message msg = mHandler.obtainMessage(LampAlarmMain.MESSAGE_DEVICE_NAME);
+        Message msg = mHandler.obtainMessage(MessageHandler.MESSAGE_DEVICE_NAME);
         Bundle bundle = new Bundle();
-        bundle.putString(LampAlarmMain.DEVICE_NAME, device.getName());
+        bundle.putString(MessageHandler.DEVICE_NAME, device.getName());
         msg.setData(bundle);
         mHandler.sendMessage(msg);
 
@@ -217,9 +217,9 @@ public class BluetoothMessageService {
      */
     private void connectionFailed() {
         // Send a failure message back to the Activity
-        Message msg = mHandler.obtainMessage(LampAlarmMain.MESSAGE_TOAST);
+        Message msg = mHandler.obtainMessage(MessageHandler.MESSAGE_TOAST);
         Bundle bundle = new Bundle();
-        bundle.putString(LampAlarmMain.TOAST, "Unable to connect device");
+        bundle.putString(MessageHandler.TOAST, "Unable to connect device");
         msg.setData(bundle);
         mHandler.sendMessage(msg);
 
@@ -232,9 +232,9 @@ public class BluetoothMessageService {
      */
     private void connectionLost() {
         // Send a failure message back to the Activity
-        Message msg = mHandler.obtainMessage(LampAlarmMain.MESSAGE_TOAST);
+        Message msg = mHandler.obtainMessage(MessageHandler.MESSAGE_TOAST);
         Bundle bundle = new Bundle();
-        bundle.putString(LampAlarmMain.TOAST, "Device connection was lost");
+        bundle.putString(MessageHandler.TOAST, "Device connection was lost");
         msg.setData(bundle);
         mHandler.sendMessage(msg);
 
@@ -432,7 +432,7 @@ public class BluetoothMessageService {
                     //If the frame isn't null send it back 
                     if (frame != null) {
                     	Log.i(TAG, "Sending frame back of length: "+ frame.size());
-                    	mHandler.obtainMessage(LampAlarmMain.MESSAGE_READ, frame.size(), -1, frame).sendToTarget();
+                    	mHandler.obtainMessage(MessageHandler.MESSAGE_READ, frame.size(), -1, frame).sendToTarget();
                     }
                     // Send the stream to a parser will write to the screen if need be.
                     //msg.echoBack(buffer);
@@ -459,7 +459,7 @@ public class BluetoothMessageService {
                 mmOutStream.write(buffer);
 
                 // Share the sent message back to the UI Activity
-                mHandler.obtainMessage(LampAlarmMain.MESSAGE_WRITE, -1, -1, buffer)
+                mHandler.obtainMessage(MessageHandler.MESSAGE_WRITE, -1, -1, buffer)
                         .sendToTarget();
             } catch (IOException e) {
                 Log.e(TAG, "Exception during write", e);
