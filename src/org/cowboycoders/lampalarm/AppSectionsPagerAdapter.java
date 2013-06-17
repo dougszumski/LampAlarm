@@ -1,5 +1,9 @@
 package org.cowboycoders.lampalarm;
 
+import org.cowboycoders.lampalarm.menu.ColourSelectionFragment;
+import org.cowboycoders.lampalarm.menu.DummySectionFragment;
+import org.cowboycoders.lampalarm.menu.MenuSectionFragment;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,15 +23,17 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 	public Fragment getItem(int i) {
 		switch (i) {
 		case 0:
-			final Fragment menuFragment= new MenuSectionFragment();
+			final Fragment menuFragment = new MenuSectionFragment();
 			final Bundle menuFragmentArgs = new Bundle();
-			menuFragmentArgs.putInt(DummySectionFragment.ARG_SECTION_NUMBER, i + 1);
+			menuFragmentArgs.putInt(DummySectionFragment.ARG_SECTION_NUMBER,
+					i + 1);
 			menuFragment.setArguments(menuFragmentArgs);
 			return menuFragment;
 		case 1:
-			final Fragment colourFragment= new ColourSelectionFragment();
+			final Fragment colourFragment = new ColourSelectionFragment();
 			final Bundle colourFragmentArgs = new Bundle();
-			colourFragmentArgs.putInt(DummySectionFragment.ARG_SECTION_NUMBER, i + 1);
+			colourFragmentArgs.putInt(DummySectionFragment.ARG_SECTION_NUMBER,
+					i + 1);
 			colourFragment.setArguments(colourFragmentArgs);
 			return colourFragment;
 		default:

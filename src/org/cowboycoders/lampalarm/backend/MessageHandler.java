@@ -1,6 +1,9 @@
-package org.cowboycoders.lampalarm;
+package org.cowboycoders.lampalarm.backend;
 
 import java.util.List;
+
+import org.cowboycoders.lampalarm.LampAlarmMain;
+import org.cowboycoders.lampalarm.R;
 
 import android.app.ActionBar;
 import android.os.Handler;

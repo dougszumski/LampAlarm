@@ -1,4 +1,4 @@
-package org.cowboycoders.lampalarm;
+package org.cowboycoders.lampalarm.backend;
 
 import java.util.List;
 

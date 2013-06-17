@@ -1,4 +1,6 @@
-package org.cowboycoders.lampalarm;
+package org.cowboycoders.lampalarm.menu;
+
+import org.cowboycoders.lampalarm.R;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

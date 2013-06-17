@@ -1,11 +1,14 @@
-package org.cowboycoders.lampalarm;
+package org.cowboycoders.lampalarm.backend;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import android.util.Log;
 
-public class CowboyMessageParser {
+public class CowboyMessageParser implements Serializable {
+
+	private static final long serialVersionUID = -5706094036232329515L;
 
 	// Debug
 	private static final String TAG = "MessageParser";

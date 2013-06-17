@@ -2,6 +2,11 @@ package org.cowboycoders.lampalarm;
 
 import java.util.List;
 
+import org.cowboycoders.lampalarm.backend.BitmapGenerator;
+import org.cowboycoders.lampalarm.backend.BluetoothConfigure;
+import org.cowboycoders.lampalarm.backend.BluetoothMessageService;
+import org.cowboycoders.lampalarm.backend.MessageHandler;
+
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.FragmentTransaction;
@@ -15,11 +20,8 @@ import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.Window;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
@@ -73,8 +75,6 @@ public class LampAlarmMain extends FragmentActivity implements
 
 		// Set up the window layout
 		setContentView(R.layout.activity_lamp_alarm_main);
-
-		
 
 		// Get local Bluetooth adapter
 		mBluetoothAdapter = BluetoothAdapter.getDefaultAdapter();
@@ -165,36 +165,6 @@ public class LampAlarmMain extends FragmentActivity implements
 		setmConversationArrayAdapter(new ArrayAdapter<String>(this,
 				R.layout.message));
 
-		/*
-		final Button leftButton = (Button) findViewById(R.id.button1);
-		leftButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				final String msg = ":a:";
-				sendMessage(msg);
-			}
-		});
-
-		final Button upButton = (Button) findViewById(R.id.button2);
-		upButton.setOnClickListener(new OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				final String msg = ":s:";
-				sendMessage(msg);
-			}
-		});
-
-		final Button rightButton = (Button) findViewById(R.id.button3);
-		rightButton.setOnClickListener(new OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				final String msg = ":d:";
-				sendMessage(msg);
-			}
-		}); */
-
 		// Initialize the BluetoothMessageService to perform bluetooth
 		// connections
 		final MessageHandler mHandler = new MessageHandler(this);
@@ -211,7 +181,7 @@ public class LampAlarmMain extends FragmentActivity implements
 	 * @param message
 	 *            A string of text to send.
 	 */
-	private void sendMessage(String message) {
+	public void sendMessage(String message) {
 		// Check that we're actually connected before trying anything
 		if (mLampAlarmService.getState() != BluetoothMessageService.STATE_CONNECTED) {
 			Toast.makeText(this, R.string.not_connected, Toast.LENGTH_SHORT)
@@ -300,8 +270,8 @@ public class LampAlarmMain extends FragmentActivity implements
 
 		final BitmapGenerator bitmapGenerator = new BitmapGenerator(128, 64);
 		final Bitmap frameBuffer = bitmapGenerator.byteArrayToBitmap(frame);
-		// button.setImageBitmap(frameBuffer);
-		// button = (ImageView) findViewById(R.id.image);
+		final ImageView button = (ImageView) findViewById(R.id.image);
+		button.setImageBitmap(frameBuffer);
 	}
 
 	public ArrayAdapter<String> getmConversationArrayAdapter() {

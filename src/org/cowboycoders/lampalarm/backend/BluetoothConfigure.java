@@ -1,4 +1,4 @@
-package org.cowboycoders.lampalarm;
+package org.cowboycoders.lampalarm.backend;
 
 /*
  * Copyright (C) 2009 The Android Open Source Project
@@ -17,6 +17,8 @@ package org.cowboycoders.lampalarm;
  */
 
 import java.util.Set;
+
+import org.cowboycoders.lampalarm.R;
 
 import android.app.Activity;
 import android.bluetooth.BluetoothAdapter;
