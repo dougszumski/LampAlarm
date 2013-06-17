@@ -24,6 +24,12 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 			menuFragmentArgs.putInt(DummySectionFragment.ARG_SECTION_NUMBER, i + 1);
 			menuFragment.setArguments(menuFragmentArgs);
 			return menuFragment;
+		case 1:
+			final Fragment colourFragment= new ColourSelectionFragment();
+			final Bundle colourFragmentArgs = new Bundle();
+			colourFragmentArgs.putInt(DummySectionFragment.ARG_SECTION_NUMBER, i + 1);
+			colourFragment.setArguments(colourFragmentArgs);
+			return colourFragment;
 		default:
 			// The other sections of the app are dummy placeholders.
 			final Fragment fragment = new DummySectionFragment();
