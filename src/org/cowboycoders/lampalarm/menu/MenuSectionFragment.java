@@ -41,9 +41,9 @@ public class MenuSectionFragment extends Fragment {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						final String msg = ":a:";
+						final String msg = ":j:";
 						if (D) {
-							Log.e(TAG, "+++ A pressed +++");
+							Log.e(TAG, "+++ J pressed +++");
 						}
 						lampAlarmMain.sendMessage(msg);
 					}
@@ -53,9 +53,9 @@ public class MenuSectionFragment extends Fragment {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						final String msg = ":s:";
+						final String msg = ":k:";
 						if (D) {
-							Log.e(TAG, "+++ S pressed +++");
+							Log.e(TAG, "+++ K pressed +++");
 						}
 						lampAlarmMain.sendMessage(msg);
 
@@ -67,13 +67,54 @@ public class MenuSectionFragment extends Fragment {
 					@Override
 					public void onClick(View view) {
 						if (D) {
-							Log.e(TAG, "+++ D pressed +++");
+							Log.e(TAG, "+++ L pressed +++");
 						}
-						final String msg = ":d:";
+						final String msg = ":l:";
 						lampAlarmMain.sendMessage(msg);
 
 					}
 				});
+		
+		
+		
+		rootView.findViewById(R.id.button4).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						final String msg = ":cff0000:";
+						if (D) {
+							Log.e(TAG, "+++ PR pressed +++");
+						}
+						lampAlarmMain.sendMessage(msg);
+					}
+				});
+
+		rootView.findViewById(R.id.button5).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						final String msg = ":c00ff00:";
+						if (D) {
+							Log.e(TAG, "+++ PG pressed +++");
+						}
+						lampAlarmMain.sendMessage(msg);
+
+					}
+				});
+
+		rootView.findViewById(R.id.button6).setOnClickListener(
+				new View.OnClickListener() {
+					@Override
+					public void onClick(View view) {
+						if (D) {
+							Log.e(TAG, "+++ PB pressed +++");
+						}
+						final String msg = ":c0000ff:";
+						lampAlarmMain.sendMessage(msg);
+
+					}
+				});
+
 
 		return rootView;
 	}

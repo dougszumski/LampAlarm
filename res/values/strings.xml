@@ -29,6 +29,10 @@
     <string name="left_button">Left</string>
     <string name="right_button">Right</string>
     
+    <string name="red_button">Red</string>
+    <string name="green_button">Green</string>
+    <string name="blue_button">Blue</string>
+    
     <string name="color_button">Set colour</string>
     
     <string name="dummy_section_text">Section %1d is just a dummy section.</string>
