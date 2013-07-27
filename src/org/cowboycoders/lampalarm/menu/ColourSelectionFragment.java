@@ -1,11 +1,13 @@
 package org.cowboycoders.lampalarm.menu;
 
+import org.cowboycoders.lampalarm.LampAlarmMain;
 import org.cowboycoders.lampalarm.R;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 import yuku.ambilwarna.AmbilWarnaDialog.OnAmbilWarnaListener;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -36,19 +38,33 @@ public class ColourSelectionFragment extends Fragment {
 				container, false);
 
 		final Bundle args = getArguments();
+		
+		final LampAlarmMain lampAlarmMain = (LampAlarmMain) getActivity();
 
-		final int initialColor = 0x00000000;
+		final int initialColor = 0x000000;
 
 		final AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
 				initialColor, new OnAmbilWarnaListener() {
+			
 					@Override
 					public void onOk(AmbilWarnaDialog dialog, int color) {
-						// color is the color selected by the user.
+						
 					}
 
 					@Override
 					public void onCancel(AmbilWarnaDialog dialog) {
 						// cancel was selected by the user
+					}
+
+					@Override
+					public void onUpdate(AmbilWarnaDialog dialog, int color) {
+						// Get the first three bytes of color and put in a string
+						String msg = ":p" + Integer.toHexString(color).substring(2).toUpperCase() +":";
+						if (D) {
+							Log.e(TAG, "Sending colour: " + msg);
+						}
+						lampAlarmMain.sendMessage(msg);
+						
 					}
 				});
 

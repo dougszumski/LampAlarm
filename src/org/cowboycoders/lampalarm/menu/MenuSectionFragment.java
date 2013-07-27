@@ -81,7 +81,7 @@ public class MenuSectionFragment extends Fragment {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						final String msg = ":cff0000:";
+						final String msg = ":pFF0000:";
 						if (D) {
 							Log.e(TAG, "+++ PR pressed +++");
 						}
@@ -93,7 +93,7 @@ public class MenuSectionFragment extends Fragment {
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
-						final String msg = ":c00ff00:";
+						final String msg = ":p00FF00:";
 						if (D) {
 							Log.e(TAG, "+++ PG pressed +++");
 						}
@@ -109,7 +109,7 @@ public class MenuSectionFragment extends Fragment {
 						if (D) {
 							Log.e(TAG, "+++ PB pressed +++");
 						}
-						final String msg = ":c0000ff:";
+						final String msg = ":p0000FF:";
 						lampAlarmMain.sendMessage(msg);
 
 					}
