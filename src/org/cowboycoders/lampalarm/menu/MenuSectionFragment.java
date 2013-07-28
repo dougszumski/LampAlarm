@@ -74,9 +74,7 @@ public class MenuSectionFragment extends Fragment {
 
 					}
 				});
-		
-		
-		
+
 		rootView.findViewById(R.id.button4).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
@@ -114,7 +112,6 @@ public class MenuSectionFragment extends Fragment {
 
 					}
 				});
-
 
 		return rootView;
 	}

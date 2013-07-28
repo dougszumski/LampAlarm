@@ -29,6 +29,7 @@
             </intent-filter>
         </activity>
         
+ 
         <activity android:name="org.cowboycoders.lampalarm.backend.BluetoothConfigure"
                   android:label="@string/select_device"
                   android:theme="@android:style/Theme.Holo.Dialog"

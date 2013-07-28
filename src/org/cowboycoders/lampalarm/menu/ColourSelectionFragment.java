@@ -38,17 +38,17 @@ public class ColourSelectionFragment extends Fragment {
 				container, false);
 
 		final Bundle args = getArguments();
-		
+
 		final LampAlarmMain lampAlarmMain = (LampAlarmMain) getActivity();
 
 		final int initialColor = 0x000000;
 
 		final AmbilWarnaDialog dialog = new AmbilWarnaDialog(getActivity(),
 				initialColor, new OnAmbilWarnaListener() {
-			
+
 					@Override
 					public void onOk(AmbilWarnaDialog dialog, int color) {
-						
+
 					}
 
 					@Override
@@ -58,13 +58,16 @@ public class ColourSelectionFragment extends Fragment {
 
 					@Override
 					public void onUpdate(AmbilWarnaDialog dialog, int color) {
-						// Get the first three bytes of color and put in a string
-						String msg = ":p" + Integer.toHexString(color).substring(2).toUpperCase() +":";
+						// Get the first three bytes of color and put in a
+						// string
+						final String msg = ":p"
+								+ Integer.toHexString(color).substring(2)
+										.toUpperCase() + ":";
 						if (D) {
 							Log.e(TAG, "Sending colour: " + msg);
 						}
 						lampAlarmMain.sendMessage(msg);
-						
+
 					}
 				});
 

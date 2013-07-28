@@ -1,8 +1,8 @@
 package org.cowboycoders.lampalarm;
 
 import org.cowboycoders.lampalarm.menu.ColourSelectionFragment;
-import org.cowboycoders.lampalarm.menu.DummySectionFragment;
 import org.cowboycoders.lampalarm.menu.MenuSectionFragment;
+import org.cowboycoders.lampalarm.menu.TouchRotatableCubeFragment;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -25,22 +25,22 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 		case 0:
 			final Fragment menuFragment = new MenuSectionFragment();
 			final Bundle menuFragmentArgs = new Bundle();
-			menuFragmentArgs.putInt(DummySectionFragment.ARG_SECTION_NUMBER,
-					i + 1);
+			menuFragmentArgs.putInt(
+					TouchRotatableCubeFragment.ARG_SECTION_NUMBER, i + 1);
 			menuFragment.setArguments(menuFragmentArgs);
 			return menuFragment;
 		case 1:
 			final Fragment colourFragment = new ColourSelectionFragment();
 			final Bundle colourFragmentArgs = new Bundle();
-			colourFragmentArgs.putInt(DummySectionFragment.ARG_SECTION_NUMBER,
-					i + 1);
+			colourFragmentArgs.putInt(
+					TouchRotatableCubeFragment.ARG_SECTION_NUMBER, i + 1);
 			colourFragment.setArguments(colourFragmentArgs);
 			return colourFragment;
 		default:
 			// The other sections of the app are dummy placeholders.
-			final Fragment fragment = new DummySectionFragment();
+			final Fragment fragment = new TouchRotatableCubeFragment();
 			final Bundle args = new Bundle();
-			args.putInt(DummySectionFragment.ARG_SECTION_NUMBER, i + 1);
+			args.putInt(TouchRotatableCubeFragment.ARG_SECTION_NUMBER, i + 1);
 			fragment.setArguments(args);
 			return fragment;
 		}
