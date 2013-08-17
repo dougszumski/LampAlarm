@@ -8,30 +8,28 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.util.Log;
 
+/**
+ * Converts a byte stream into an image.
+ * 
+ * @author doug
+ * 
+ */
 public class BitmapGenerator {
 
 	// Debug
 	private static final String TAG = "Bitmap Generator";
 	private static final boolean D = true;
 
-	// Image dimension
-	private final int xPixels;
-	private final int yPixels;
-
-	Bitmap bitmap;
+	Bitmap frameBuffer;
 	Canvas canvas;
 	Paint paint;
 
 	public BitmapGenerator(int xPixels, int yPixels) {
-		// Set the image dimensions
-		this.xPixels = xPixels;
-		this.yPixels = yPixels;
 
-		// Create bitmap
-		bitmap = Bitmap.createBitmap(xPixels, yPixels, Bitmap.Config.ARGB_8888);
-
-		// Create a canvas to draw on the bitmap
-		canvas = new Canvas(bitmap);
+		// Reconstruct the frame buffer
+		frameBuffer = Bitmap.createBitmap(xPixels, yPixels,
+				Bitmap.Config.ARGB_8888);
+		canvas = new Canvas(frameBuffer);
 
 		// Set the drawing colour
 		paint = new Paint();
@@ -39,38 +37,51 @@ public class BitmapGenerator {
 		paint.setColor(Color.BLACK);
 	}
 
+	/**
+	 * Converts the specified frame into a bitmap.
+	 * 
+	 * TODO: Clean this method up
+	 * 
+	 * @param frame
+	 *            - Frame to rebuild as a stream of bytes.
+	 * @return - Bitmap build from byte stream.
+	 */
 	public Bitmap byteArrayToBitmap(List<Integer> frame) {
+
 		int count = 0;
 		int index = 0;
 		int data = 0;
 		final int len = frame.size() - 1;
 		// Subtle bug here: we are going over the end of the array
 		for (int u8Page = 0; u8Page < 8; ++u8Page) {
+
 			for (int u8Column = 0; u8Column < 128; ++u8Column) {
+
 				if (count == 0) {
+
 					data = frame.get(index);
-					// System.out.println(data + "," + index);
 					if (index < len) {
 						index++;
 					}
 					if (data == frame.get(index)) {
+
 						if (index < len) {
 							index++;
 						}
-						// System.out.println("Match: " + data+ " repeating: " +
-						// frame.get(index));
 						// If data is repeated write it count times
 						count = frame.get(index);
 						if (index < len) {
 							index++;
 						}
 					} else {
+
 						// Else only write it once
 						count = 1;
 					}
 				}
 
 				for (int i = 7; i >= 0; i--) {
+
 					if ((data & (1 << i)) != 0) {
 						paint.setColor(Color.WHITE);
 					} else {
@@ -84,17 +95,14 @@ public class BitmapGenerator {
 			}
 		}
 
-		return bitmap;
+		return frameBuffer;
 	}
 
-	public void printArray(int[] input) {
-		for (int i = 0; i < input.length; ++i) {
-			Log.e(TAG, String.valueOf(input[i]));
-		}
-
-	}
-
+	/**
+	 * Testing
+	 */
 	public void main() {
+
 		final int[] cowboy = { 0x0, 0x0, 0x3c, 0xa0, 0x0, 0x20, 0x40, 0x90,
 				0x20, 0x40, 0xa0, 0x0, 0xf0, 0x0, 0xf0, 0x80, 0x0, 0x0, 0x62,
 				0x50, 0x28, 0x80, 0x68, 0x10, 0xc0, 0x10, 0x20, 0xc0, 0x20,
@@ -133,6 +141,13 @@ public class BitmapGenerator {
 				0x2, 0x1, 0x0, 0x2, 0x0, 0x2 };
 
 		printArray(cowboy);
+
+	}
+
+	public void printArray(int[] input) {
+		for (int i = 0; i < input.length; ++i) {
+			Log.e(TAG, String.valueOf(input[i]));
+		}
 
 	}
 

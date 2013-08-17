@@ -12,8 +12,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 /**
- * A dummy fragment representing a section of the app, but that simply displays
- * dummy text.
+ * Controls the lamp menu.
+ * 
+ * @author doug
+ * 
  */
 public class MenuSectionFragment extends Fragment {
 

@@ -17,6 +17,7 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 
 	public AppSectionsPagerAdapter(FragmentManager fm) {
 		super(fm);
+
 	}
 
 	@Override
@@ -59,7 +60,7 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 		case 1:
 			return "Colour";
 		case 2:
-			return "Settings";
+			return "Todo";
 		default:
 			return "Section " + (position + 1);
 		}

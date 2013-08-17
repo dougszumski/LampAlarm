@@ -11,10 +11,11 @@ import com.larswerkman.colorpicker.ColorPicker.OnColorChangedListener;
 import com.larswerkman.colorpicker.SVBar;
 
 /**
- * Updates the lamp colour and the left side of the colour picker if the message is sent.
+ * Updates the lamp colour and the left side of the colour picker if the message
+ * is sent.
  * 
  * @author doug
- *
+ * 
  */
 public class ColourChangedListener implements OnColorChangedListener {
 
@@ -26,7 +27,8 @@ public class ColourChangedListener implements OnColorChangedListener {
 	private final ColorPicker picker;
 	private final SVBar saturationBrightnessBar;
 
-	public ColourChangedListener(LampAlarmMain lampAlarmMain, ColorPicker picker, SVBar saturationBrightnessBar) {
+	public ColourChangedListener(LampAlarmMain lampAlarmMain,
+			ColorPicker picker, SVBar saturationBrightnessBar) {
 		this.lampAlarmMain = lampAlarmMain;
 		this.picker = picker;
 		this.saturationBrightnessBar = saturationBrightnessBar;
@@ -35,9 +37,9 @@ public class ColourChangedListener implements OnColorChangedListener {
 
 	@Override
 	public void onColorChanged(int color) {
-		
+
 		color = saturationBrightnessBar.getColor();
-		
+
 		// Get the first three bytes of colour and put in a
 		// string
 		final String msg = ":p"

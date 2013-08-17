@@ -183,14 +183,14 @@ public class LampAlarmMain extends FragmentActivity implements
 	 * 
 	 * @param message
 	 *            A string of text to send.
-	 *            
+	 * 
 	 * @return - True if message was sent, else false.
 	 */
 	public boolean sendMessage(String message) {
 
 		// Update the timeStamp
-		long timeNow = System.currentTimeMillis();
-		long timeDelta = timeNow - timeStamp;
+		final long timeNow = System.currentTimeMillis();
+		final long timeDelta = timeNow - timeStamp;
 		timeStamp = timeNow;
 		if (timeDelta < MINIMUM_TIME_BETWEEN_MESSAGES_MS) {
 			return false;
@@ -204,14 +204,14 @@ public class LampAlarmMain extends FragmentActivity implements
 			return false;
 		}
 
-		// Send the message 
+		// Send the message
 		if (message.length() > 0) {
 			// Get the message bytes and tell the BluetoothChatService to write
 			final byte[] send = message.getBytes();
 			mLampAlarmService.write(send);
 			return true;
 		}
-		
+
 		return false;
 	}
 

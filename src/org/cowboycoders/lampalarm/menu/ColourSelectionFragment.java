@@ -8,7 +8,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.larswerkman.colorpicker.ColorPicker;
 import com.larswerkman.colorpicker.SVBar;
@@ -17,7 +16,7 @@ import com.larswerkman.colorpicker.SVBar;
  * Dialogue to choose the lamp colour
  * 
  * @author doug
- *
+ * 
  */
 public class ColourSelectionFragment extends Fragment {
 
@@ -26,8 +25,8 @@ public class ColourSelectionFragment extends Fragment {
 	// Debug
 	private static final String TAG = "LampAlarm";
 	private static final boolean D = true;
-	
-	private static final int DEFAULT_COLOUR = 0xFFF566;
+
+	private static final int DEFAULT_COLOUR = 0xFFF88D;
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -45,7 +44,9 @@ public class ColourSelectionFragment extends Fragment {
 		final SVBar saturationBrightnessBar = (SVBar) rootView
 				.findViewById(R.id.svbar);
 		picker.addSVBar(saturationBrightnessBar);
-		
+
+		picker.setColor(DEFAULT_COLOUR);
+
 		// Update lamp colour on selection
 		picker.setOnColorChangedListener(new ColourChangedListener(
 				lampAlarmMain, picker, saturationBrightnessBar));

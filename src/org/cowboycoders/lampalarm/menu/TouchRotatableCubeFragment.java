@@ -25,7 +25,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
 
 /**
  * Rotatable cube fragment based on API example.
@@ -43,9 +42,9 @@ public class TouchRotatableCubeFragment extends Fragment {
 		final View rootView = inflater.inflate(R.layout.fragment_section_dummy,
 				container, false);
 		final Bundle args = getArguments();
-		//((TextView) rootView.findViewById(android.R.id.text1))
-		//		.setText(getString(R.string.dummy_section_text,
-		//				args.getInt(ARG_SECTION_NUMBER)));
+		// ((TextView) rootView.findViewById(android.R.id.text1))
+		// .setText(getString(R.string.dummy_section_text,
+		// args.getInt(ARG_SECTION_NUMBER)));
 
 		// Create our Preview view and set it as the content of our
 		// Activity
