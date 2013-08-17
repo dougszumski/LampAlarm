@@ -47,6 +47,9 @@ public class LampAlarmMain extends FragmentActivity implements
 	// Member object for the chat services
 	private BluetoothMessageService mLampAlarmService = null;
 
+	private static final int MINIMUM_TIME_BETWEEN_MESSAGES_MS = 10;
+	private long timeStamp = System.currentTimeMillis();
+
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
 	 * fragments for each of the three primary sections of the app. We use a
@@ -180,21 +183,36 @@ public class LampAlarmMain extends FragmentActivity implements
 	 * 
 	 * @param message
 	 *            A string of text to send.
+	 *            
+	 * @return - True if message was sent, else false.
 	 */
-	public void sendMessage(String message) {
-		// Check that we're actually connected before trying anything
-		if (mLampAlarmService.getState() != BluetoothMessageService.STATE_CONNECTED) {
-			Toast.makeText(this, R.string.not_connected, Toast.LENGTH_SHORT)
-					.show();
-			return;
+	public boolean sendMessage(String message) {
+
+		// Update the timeStamp
+		long timeNow = System.currentTimeMillis();
+		long timeDelta = timeNow - timeStamp;
+		timeStamp = timeNow;
+		if (timeDelta < MINIMUM_TIME_BETWEEN_MESSAGES_MS) {
+			return false;
 		}
 
-		// Check that there's actually something to send
+		// Check that we're actually connected before trying anything
+		if (mLampAlarmService.getState() != BluetoothMessageService.STATE_CONNECTED) {
+
+			Toast.makeText(this, R.string.not_connected, Toast.LENGTH_SHORT)
+					.show();
+			return false;
+		}
+
+		// Send the message 
 		if (message.length() > 0) {
 			// Get the message bytes and tell the BluetoothChatService to write
 			final byte[] send = message.getBytes();
 			mLampAlarmService.write(send);
+			return true;
 		}
+		
+		return false;
 	}
 
 	// Gets called after an activity returns

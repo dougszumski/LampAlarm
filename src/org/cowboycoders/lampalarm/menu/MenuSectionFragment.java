@@ -37,7 +37,7 @@ public class MenuSectionFragment extends Fragment {
 
 		final LampAlarmMain lampAlarmMain = (LampAlarmMain) getActivity();
 
-		rootView.findViewById(R.id.button1).setOnClickListener(
+		rootView.findViewById(R.id.button_left).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
@@ -49,7 +49,7 @@ public class MenuSectionFragment extends Fragment {
 					}
 				});
 
-		rootView.findViewById(R.id.button2).setOnClickListener(
+		rootView.findViewById(R.id.button_select).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
@@ -62,7 +62,7 @@ public class MenuSectionFragment extends Fragment {
 					}
 				});
 
-		rootView.findViewById(R.id.button3).setOnClickListener(
+		rootView.findViewById(R.id.button_right).setOnClickListener(
 				new View.OnClickListener() {
 					@Override
 					public void onClick(View view) {
@@ -70,44 +70,6 @@ public class MenuSectionFragment extends Fragment {
 							Log.e(TAG, "+++ L pressed +++");
 						}
 						final String msg = ":l:";
-						lampAlarmMain.sendMessage(msg);
-
-					}
-				});
-
-		rootView.findViewById(R.id.button4).setOnClickListener(
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						final String msg = ":pFF0000:";
-						if (D) {
-							Log.e(TAG, "+++ PR pressed +++");
-						}
-						lampAlarmMain.sendMessage(msg);
-					}
-				});
-
-		rootView.findViewById(R.id.button5).setOnClickListener(
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						final String msg = ":p00FF00:";
-						if (D) {
-							Log.e(TAG, "+++ PG pressed +++");
-						}
-						lampAlarmMain.sendMessage(msg);
-
-					}
-				});
-
-		rootView.findViewById(R.id.button6).setOnClickListener(
-				new View.OnClickListener() {
-					@Override
-					public void onClick(View view) {
-						if (D) {
-							Log.e(TAG, "+++ PB pressed +++");
-						}
-						final String msg = ":p0000FF:";
 						lampAlarmMain.sendMessage(msg);
 
 					}

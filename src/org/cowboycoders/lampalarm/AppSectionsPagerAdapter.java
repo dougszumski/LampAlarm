@@ -57,7 +57,7 @@ public class AppSectionsPagerAdapter extends FragmentPagerAdapter {
 		case 0:
 			return "Menu";
 		case 1:
-			return "Colours";
+			return "Colour";
 		case 2:
 			return "Settings";
 		default:

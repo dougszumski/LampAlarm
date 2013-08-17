@@ -44,7 +44,7 @@
         android:columnCount="@integer/button_row" >
 
         <Button
-            android:id="@+id/button1"
+            android:id="@+id/button_left"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginLeft="8dp"
@@ -52,44 +52,20 @@
             android:text="@+string/left_button" />
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/button_select"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            android:text="@+string/up_button" />
+            android:text="@+string/select_button" />
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/button_right"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
             android:text="@+string/right_button" />
-        
-        <Button
-            android:id="@+id/button4"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@+string/red_button" />
-
-        <Button
-            android:id="@+id/button5"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@+string/green_button" />
-
-        <Button
-            android:id="@+id/button6"
-            android:layout_width="100dp"
-            android:layout_height="40dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="8dp"
-            android:text="@+string/blue_button" />
     </GridLayout>
 
 </RelativeLayout>
