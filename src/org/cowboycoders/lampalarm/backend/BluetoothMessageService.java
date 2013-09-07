@@ -485,7 +485,7 @@ public class BluetoothMessageService {
 			final byte[] buffer = new byte[1024];
 			int bytes;
 			final CowboyMessageParser msg = new CowboyMessageParser();
-			final int i = 0;
+			
 			List<Integer> frame = new ArrayList<Integer>();
 
 			// Keep listening to the InputStream while connected

@@ -12,9 +12,9 @@ public class CowboyMessageParser implements Serializable {
 
 	// Debug
 	private static final String TAG = "MessageParser";
-	private static final boolean D = false;
+	private static final boolean D = true;
 
-	private static final CharSequence END_FRAME_MARKER = ":";
+	private static final char END_FRAME_MARKER = ':';
 
 	// String buffer for incoming messages
 	private final StringBuffer mFrameBuffer;
@@ -25,30 +25,36 @@ public class CowboyMessageParser implements Serializable {
 		mFrameBuffer = new StringBuffer("");
 	}
 
+	/**
+	 * Append 
+	 * 
+	 * @param message - Incoming message
+	 * @param messageLength
+	 * @return
+	 */
 	public List<Integer> append(byte[] message, int messageLength) {
+		
+		//Convert message to a String
 		final String stringMessage = new String(message, 0, messageLength);
 		List<Integer> frame = new ArrayList<Integer>();
 		boolean frameReady = false;
 
-		final StringBuffer ackPacket = new StringBuffer("");
-
+		// Extract the message
 		for (int i = 0; i < stringMessage.length(); ++i) {
 			final char c = stringMessage.charAt(i);
-			if (c == ':') {
+			if (c == END_FRAME_MARKER) {
 				if (D) {
 					Log.i(TAG, "Frame detected, previous frame was: "
 							+ mFrameBuffer.length() + " bytes long");
 				}
-				if (D) {
-					Log.i(TAG, ": is " + String.format("%x", (int) c));
+				// All messages should be multiples of 2 since they are in ASCII hex
+				// This serves as a crude check for corruption
+				// TODO: Remove when proper protocol is used.
+				if (mFrameBuffer.length() % 2 == 0) {
+					frame = assembleFrame();
+					frameReady = true;
 				}
-				frame = assembleFrame();
-				frameReady = true;
 				resetFrameBuffer();
-				if (c == '#') {
-					ackPacket.setLength(0);
-				}
-
 			} else {
 				mFrameBuffer.append(c);
 			}
@@ -63,9 +69,9 @@ public class CowboyMessageParser implements Serializable {
 	}
 
 	public List<Integer> assembleFrame() {
-		// int[] buffer = new int[mFrameBuffer.length()];
+		
 		final List<Integer> buffer = new ArrayList<Integer>();
-		final String tempByte;
+		
 		for (int i = 0; i < mFrameBuffer.length(); i += 2) {
 			// Convert string to int 2 chars at a time
 			try {
