@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.cowboycoders.lampalarm.menu;
+package org.cowboycoders.lampalarm.fragments;
 
 import org.cowboycoders.lampalarm.R;
 import org.cowboycoders.lampalarm.touchableCube.TouchSurfaceView;
@@ -30,7 +30,7 @@ import android.view.ViewGroup;
  * Rotatable cube fragment based on API example.
  * 
  */
-public class TouchRotatableCubeFragment extends Fragment {
+public class RotatableCubeFragment extends Fragment {
 
 	public static final String ARG_SECTION_NUMBER = "section_number";
 

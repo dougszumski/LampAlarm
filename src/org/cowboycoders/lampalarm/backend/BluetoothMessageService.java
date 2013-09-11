@@ -220,7 +220,7 @@ public class BluetoothMessageService {
 	 */
 	public synchronized void stop() {
 		if (D) {
-			Log.d(TAG, "stop");
+			Log.d(TAG, "Stopping all threads");
 		}
 
 		if (mConnectThread != null) {
@@ -510,7 +510,7 @@ public class BluetoothMessageService {
 					// .sendToTarget();
 
 				} catch (final IOException e) {
-					Log.e(TAG, "disconnected", e);
+					Log.e(TAG, "Disconnected: Cannot read stream.");
 					connectionLost();
 					// Start the service over to restart listening mode
 					BluetoothMessageService.this.start();

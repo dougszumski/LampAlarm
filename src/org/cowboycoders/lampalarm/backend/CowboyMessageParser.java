@@ -12,7 +12,7 @@ public class CowboyMessageParser implements Serializable {
 
 	// Debug
 	private static final String TAG = "MessageParser";
-	private static final boolean D = true;
+	private static final boolean D = false;
 
 	private static final char END_FRAME_MARKER = ':';
 

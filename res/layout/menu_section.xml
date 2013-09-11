@@ -17,7 +17,7 @@
         android:layout_alignParentTop="false"
         android:layout_centerInParent="true"
         android:layout_gravity="center_vertical"
-        android:background="#800000"
+        android:background="#404040"
         android:paddingBottom="10dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
@@ -27,8 +27,14 @@
             android:id="@+id/image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="#0F0F0F"
+            android:padding="1dp"
             android:minHeight="150dp"
-            android:minWidth="300dp" />
+            android:minWidth="300dp"
+            tools:ignore="ContentDescription"  />
+
+
     </FrameLayout>
 
     <GridLayout
@@ -43,29 +49,33 @@
         android:alignmentMode="alignMargins"
         android:columnCount="@integer/button_row" >
 
-        <Button
+        <ImageButton
             android:id="@+id/button_left"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            android:text="@+string/left_button" />
+            android:src="@drawable/left"
+            android:contentDescription="@+string/left_button_descrip" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_select"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            android:text="@+string/select_button" />
+            android:src="@drawable/enter"
+            android:contentDescription="@+string/select_button_descrip" />
 
-        <Button
+        <ImageButton
             android:id="@+id/button_right"
             android:layout_width="100dp"
             android:layout_height="40dp"
             android:layout_marginLeft="8dp"
             android:layout_marginTop="8dp"
-            android:text="@+string/right_button" />
+            android:src="@drawable/right"
+            android:contentDescription="@+string/right_button_descrip"/>
+        
     </GridLayout>
 
 </RelativeLayout>

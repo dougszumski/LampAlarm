@@ -1,7 +1,8 @@
-package org.cowboycoders.lampalarm.menu;
+package org.cowboycoders.lampalarm.fragments;
 
 import org.cowboycoders.lampalarm.LampAlarmMain;
 import org.cowboycoders.lampalarm.R;
+import org.cowboycoders.lampalarm.backend.ColourChangedListener;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;

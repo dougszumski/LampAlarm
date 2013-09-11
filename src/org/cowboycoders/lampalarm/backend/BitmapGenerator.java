@@ -2,10 +2,14 @@ package org.cowboycoders.lampalarm.backend;
 
 import java.util.List;
 
+import org.cowboycoders.lampalarm.R;
+
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
 /**
