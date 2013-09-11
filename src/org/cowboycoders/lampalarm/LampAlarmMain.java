@@ -14,6 +14,9 @@ import android.bluetooth.BluetoothAdapter;
 import android.bluetooth.BluetoothDevice;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Matrix;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
@@ -42,13 +45,13 @@ public class LampAlarmMain extends FragmentActivity implements
 	private ArrayAdapter<String> mConversationArrayAdapter;
 
 	// String buffer for outgoing messages
-	private StringBuffer mOutStringBuffer;
+	//private StringBuffer mOutStringBuffer;
 
 	// Member object for the chat services
 	private BluetoothMessageService mLampAlarmService = null;
 
-	private static final int MINIMUM_TIME_BETWEEN_MESSAGES_MS = 10;
-	private long timeStamp = System.currentTimeMillis();
+	//private static final int MINIMUM_TIME_BETWEEN_MESSAGES_MS = 10;
+	//private long timeStamp = System.currentTimeMillis();
 
 	/**
 	 * The {@link android.support.v4.view.PagerAdapter} that will provide
@@ -160,12 +163,49 @@ public class LampAlarmMain extends FragmentActivity implements
 			}
 		}
 	}
+	
+    @Override
+    public synchronized void onResume() {
+        super.onResume();
+        if(D) Log.e(TAG, "+ ON RESUME +");
+
+        // Performing this check in onResume() covers the case in which BT was
+        // not enabled during onStart(), so we were paused to enable it...
+        // onResume() will be called when ACTION_REQUEST_ENABLE activity returns.
+        if (mLampAlarmService != null) {
+            // Only if the state is STATE_NONE, do we know that we haven't started already
+            if (mLampAlarmService.getState() == BluetoothMessageService.STATE_NONE) {
+              // Start the Bluetooth chat services
+            	mLampAlarmService.start();
+            }
+        }
+    }
+	
+	@Override
+    public synchronized void onPause() {
+        super.onPause();
+        if(D) Log.e(TAG, "- ON PAUSE -");
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        if(D) Log.e(TAG, "-- ON STOP --");
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        // Stop the Bluetooth chat services
+        if (mLampAlarmService != null) mLampAlarmService.stop();
+        if(D) Log.e(TAG, "--- ON DESTROY ---");
+    }
 
 	private void setupLampAlarmSession() {
 		Log.d(TAG, "setupLampAlarmSession()");
 
 		// Initialize the array adapter for the conversation thread
-		setmConversationArrayAdapter(new ArrayAdapter<String>(this,
+		setmMessageArrayAdapter(new ArrayAdapter<String>(this,
 				R.layout.message));
 
 		// Initialize the BluetoothMessageService to perform bluetooth
@@ -174,7 +214,7 @@ public class LampAlarmMain extends FragmentActivity implements
 		mLampAlarmService = new BluetoothMessageService(this, mHandler);
 
 		// Initialize the buffer for outgoing messages
-		mOutStringBuffer = new StringBuffer("");
+		//mOutStringBuffer = new StringBuffer("");
 
 	}
 
@@ -189,12 +229,12 @@ public class LampAlarmMain extends FragmentActivity implements
 	public boolean sendMessage(String message) {
 
 		// Update the timeStamp
-		final long timeNow = System.currentTimeMillis();
-		final long timeDelta = timeNow - timeStamp;
-		timeStamp = timeNow;
-		if (timeDelta < MINIMUM_TIME_BETWEEN_MESSAGES_MS) {
-			return false;
-		}
+		//final long timeNow = System.currentTimeMillis();
+		//final long timeDelta = timeNow - timeStamp;
+		//timeStamp = timeNow;
+		//if (timeDelta < MINIMUM_TIME_BETWEEN_MESSAGES_MS) {
+		//	return false;
+		//}
 
 		// Check that we're actually connected before trying anything
 		if (mLampAlarmService.getState() != BluetoothMessageService.STATE_CONNECTED) {
@@ -284,19 +324,34 @@ public class LampAlarmMain extends FragmentActivity implements
 	 * @param frame
 	 *            - Frame to update image with.
 	 */
-	public void updateImage(List<Integer> frame) {
+	public void updateImage(List<Integer> screenData) {
 
 		final BitmapGenerator bitmapGenerator = new BitmapGenerator(128, 64);
-		final Bitmap frameBuffer = bitmapGenerator.byteArrayToBitmap(frame);
-		final ImageView button = (ImageView) findViewById(R.id.image);
-		button.setImageBitmap(frameBuffer);
+		final Bitmap frameBuffer = bitmapGenerator.byteArrayToBitmap(screenData);
+		
+		Bitmap frame = BitmapFactory.decodeResource(getResources(),
+               R.drawable.frame);
+
+		final ImageView screenBuffer = (ImageView) findViewById(R.id.image);
+		//screenBuffer.setImageBitmap(overlay(frame, frameBuffer));
 	}
+	
+	
+	private Bitmap overlay(Bitmap base, Bitmap image) {
+        Bitmap bmOverlay = Bitmap.createBitmap(base.getWidth(), base.getHeight(), base.getConfig());
+        Canvas canvas = new Canvas(bmOverlay);
+        Matrix matrix = new Matrix();
+        canvas.drawBitmap(base, matrix, null);
+        matrix.setTranslate(50, 50);
+        canvas.drawBitmap(image, matrix, null);
+        return bmOverlay;
+    } 
 
 	public ArrayAdapter<String> getmConversationArrayAdapter() {
 		return mConversationArrayAdapter;
 	}
 
-	public void setmConversationArrayAdapter(
+	public void setmMessageArrayAdapter(
 			ArrayAdapter<String> mConversationArrayAdapter) {
 		this.mConversationArrayAdapter = mConversationArrayAdapter;
 	}
